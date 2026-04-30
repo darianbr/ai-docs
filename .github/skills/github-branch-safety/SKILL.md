@@ -26,17 +26,20 @@ Use this skill to enforce safe branch and push practices before opening or updat
 
 1. Inspect remote branches and recent commits with branch and commit MCP tools.
 2. Verify current branch is not `main` and not a protected long-running branch.
-3. If needed, create a new working branch with `mcp_github_create_branch`.
+3. If currently on `main`, create and switch to a new working branch before making changes.
 4. Check whether branch is behind base and sync by rebasing or merging base into working branch.
 5. Verify only intended files changed and run local validation checks before push.
 6. Push working branch and create or update a PR with `mcp_github_create_pull_request`.
+7. Merge via PR only after checks and review; do not bypass directly to `main`.
 
 ## Guardrails
 
 - Block direct push or commit plans targeting `main`.
 - Block direct push or commit plans targeting long-running shared branches.
+- If work starts on `main`, stop and branch before any commit.
 - Require branch sync check before every push.
 - Require a PR link for all non-trivial changes.
+- Require explicit user approval before any direct-to-`main` exception.
 
 ## Output format
 
