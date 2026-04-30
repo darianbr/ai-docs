@@ -32,6 +32,10 @@ This repo includes reusable Copilot skills for GitHub workflows and safety pract
 
 ### Prompts
 - .github/prompts/create-pr.prompt.md — Create a PR following all safety and quality best practices
+- .github/prompts/sync-ai-docs.prompt.md — Pull the latest ai-docs configuration and skills
+
+### Workspace Instructions
+- .github/copilot-instructions.md — Guidance for keeping ai-docs in sync; loaded at session start
 
 ### GitHub Workflow Skills (MCP-enabled)
 - .github/skills/github-issue-triage/SKILL.md
