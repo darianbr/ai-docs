@@ -12,10 +12,7 @@ This workspace uses shared Copilot configuration from the **ai-docs** repository
 
 When you open a new session or switch workspaces:
 
-1. **Pull the latest ai-docs** to stay in sync with shared updates:
-   ```bash
-   /sync-ai-docs
-   ```
+1. **ai-docs auto-syncs** when you open Chat for the first time (hook runs automatically)
 
 2. **Verify MCP is loaded** by running `MCP: List Servers` in the Command Palette (Ctrl+Shift+P)
 
@@ -37,7 +34,7 @@ Type `/` in Chat to see all available skills:
 - `/sync-ai-docs` — Pull latest ai-docs configuration
 
 ## If Skills Don't Appear
-
+Manually pull latest ai-docs if needed (auto-syncs on chat open)
 1. Confirm `.github/` folder is in the workspace
 2. Run `MCP: List Servers` to verify GitHub MCP is enabled
 3. Reload VS Code (Ctrl+Shift+P → "Developer: Reload Window")

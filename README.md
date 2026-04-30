@@ -37,6 +37,9 @@ This repo includes reusable Copilot skills for GitHub workflows and safety pract
 ### Workspace Instructions
 - .github/copilot-instructions.md — Guidance for keeping ai-docs in sync; loaded at session start
 
+### Hooks
+- .github/hooks/sync-ai-docs.json — Auto-syncs ai-docs before first chat interaction in a session
+
 ### GitHub Workflow Skills (MCP-enabled)
 - .github/skills/github-issue-triage/SKILL.md
 - .github/skills/github-pr-review-ops/SKILL.md

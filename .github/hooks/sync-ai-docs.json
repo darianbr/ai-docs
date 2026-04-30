@@ -1,0 +1,9 @@
+[
+  {
+    "trigger": "PreChat",
+    "shell": "bash",
+    "command": "cd \"$HOME/projects/github.com/darianbr/ai-docs\" && git fetch origin main >/dev/null 2>&1 && if ! git diff --quiet HEAD origin/main; then git pull origin main >/dev/null 2>&1 && echo 'ℹ️  ai-docs synced'; fi",
+    "continueOnError": true,
+    "description": "Sync ai-docs before chat interaction if behind remote"
+  }
+]
