@@ -1,0 +1,78 @@
+#!/bin/bash
+# GitHub Actions workflow: validate ai-docs configuration syntax
+
+name: Validate Configuration
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/**'
+      - 'global/**'
+      - '.gitmessage'
+      - '.commitlintrc.json'
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/**'
+      - 'global/**'
+
+jobs:
+  validate-json:
+    name: Validate JSON Syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Validate hooks JSON
+        run: |
+          for file in .github/hooks/*.json; do
+            if [ -f "$file" ]; then
+              echo "Validating $file..."
+              jq empty "$file" || exit 1
+            fi
+          done
+          echo "✓ All JSON files valid"
+
+  validate-markdown:
+    name: Validate Markdown Frontmatter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check for required YAML frontmatter
+        run: |
+          for file in .github/skills/*/SKILL.md .github/prompts/*.prompt.md; do
+            if [ -f "$file" ]; then
+              echo "Checking $file..."
+              if ! head -1 "$file" | grep -q "^---$"; then
+                echo "❌ Missing YAML frontmatter in $file"
+                exit 1
+              fi
+              if ! grep -q "^name:" "$file"; then
+                echo "❌ Missing 'name' field in $file"
+                exit 1
+              fi
+              if ! grep -q "^description:" "$file"; then
+                echo "❌ Missing 'description' field in $file"
+                exit 1
+              fi
+            fi
+          done
+          echo "✓ All markdown files have valid frontmatter"
+
+  validate-mcp:
+    name: Validate MCP Configuration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Validate MCP JSON
+        run: |
+          for file in global/vscode-user/mcp.json .vscode/mcp.json; do
+            if [ -f "$file" ]; then
+              echo "Validating $file..."
+              jq '.servers | keys' "$file" || exit 1
+              echo "✓ $file valid"
+            fi
+          done

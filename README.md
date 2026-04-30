@@ -1,44 +1,31 @@
 # ai-docs
 
-Shared AI configuration docs and settings that can be versioned and synced through GitHub.
+Shared AI configuration docs and settings for multi-repo VS Code workspaces.
 
-This repository is intended to be used in a multi-repo VS Code workspace.
+## Design goal
 
-Minimum workspace folders:
+Drop-in behavior with no install step and no sync step.
+
+If `ai-docs` is included as a folder in your workspace, the shared instructions, prompts, skills, and MCP config are available automatically.
+
+## Minimum workspace
 
 - current-project
 - ai-docs
 
-## VS Code global config source
+## Automatic behavior
 
-This repo stores the source of truth for VS Code user-level AI configuration.
+- `.github/` content in `ai-docs` is discovered by Copilot Chat in the workspace.
+- `.vscode/mcp.json` in `ai-docs` provides the GitHub MCP server configuration for that workspace.
+- No user-level symlink, no install script, and no sync hook are required.
 
-- Source file: `global/vscode-user/mcp.json`
-- Linked target: `~/.config/Code/User/mcp.json`
-
-## Apply local link
-
-Run:
-
-```bash
-ln -sfn "$HOME/projects/github.com/darianbr/ai-docs/global/vscode-user/mcp.json" "$HOME/.config/Code/User/mcp.json"
-```
-
-After updating files in this repo, commit and push to sync across machines.
-
-## Shared skills
-
-This repo includes reusable Copilot skills for GitHub workflows and safety practices.
+## Shared assets
 
 ### Prompts
-- .github/prompts/create-pr.prompt.md — Create a PR following all safety and quality best practices
-- .github/prompts/sync-ai-docs.prompt.md — Pull the latest ai-docs configuration and skills
+- .github/prompts/create-pr.prompt.md
 
 ### Workspace Instructions
-- .github/copilot-instructions.md — Guidance for keeping ai-docs in sync; loaded at session start
-
-### Hooks
-- .github/hooks/sync-ai-docs.json — Auto-syncs ai-docs before first chat interaction in a session
+- .github/copilot-instructions.md
 
 ### GitHub Workflow Skills (MCP-enabled)
 - .github/skills/github-issue-triage/SKILL.md
@@ -52,14 +39,5 @@ This repo includes reusable Copilot skills for GitHub workflows and safety pract
 - .github/skills/code-quality-and-security-gates/SKILL.md
 - .github/skills/merge-conflict-and-rebase-safety/SKILL.md
 
-Use these as shared workflow docs in your multi-repo workspace setup.
-
-#### Safety coverage
-
-- **Branch safety**: No commits to `main` or long-running branches; PR-first workflow; branch sync enforcement.
-- **Pre-push validation**: Local tests, linting, type checks; commit message quality; secret detection.
-- **PR readiness**: CI passing; focused scope; clear description; resolved conversations.
-- **Code quality & security**: Secret scanning; vulnerability checks; test coverage; breaking changes.
-- **Merge safety**: Conflict resolution; safe rebase; force-push coordination; clean history.
-- **Release readiness**: Tag checks; blocker inventory; changelog updates.
-- **Issue triage**: Consistent labeling, assignment, delegation; safe code changes from tasks.
+### Validation Workflow
+- .github/workflows/validate-config.yml

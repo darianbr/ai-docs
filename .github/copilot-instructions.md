@@ -1,10 +1,10 @@
 ---
 name: AI Docs Workspace Setup
-description: "Guidance for keeping shared AI configuration in sync across sessions"
+description: "Guidance for using shared AI configuration in multi-repo workspaces"
 applyTo: "**"
 ---
 
-# AI Docs Sync Instructions
+# AI Docs Workspace Instructions
 
 This workspace uses shared Copilot configuration from the **ai-docs** repository, including MCP servers, skills, prompts, and safety practices.
 
@@ -12,7 +12,7 @@ This workspace uses shared Copilot configuration from the **ai-docs** repository
 
 When you open a new session or switch workspaces:
 
-1. **ai-docs auto-syncs** when you open Chat for the first time (hook runs automatically)
+1. Confirm `ai-docs` is included as a workspace folder.
 
 2. **Verify MCP is loaded** by running `MCP: List Servers` in the Command Palette (Ctrl+Shift+P)
 
@@ -31,10 +31,9 @@ Type `/` in Chat to see all available skills:
 - `/code-quality-and-security-gates` — Check for security/quality issues
 - `/merge-conflict-and-rebase-safety` — Safely resolve conflicts
 - `/create-pr` — Create a new pull request following best practices
-- `/sync-ai-docs` — Pull latest ai-docs configuration
 
 ## If Skills Don't Appear
-Manually pull latest ai-docs if needed (auto-syncs on chat open)
+
 1. Confirm `.github/` folder is in the workspace
 2. Run `MCP: List Servers` to verify GitHub MCP is enabled
 3. Reload VS Code (Ctrl+Shift+P → "Developer: Reload Window")
@@ -45,6 +44,6 @@ Manually pull latest ai-docs if needed (auto-syncs on chat open)
 When you clone this workspace setup for a new project:
 
 1. Add your current-project as a second folder in the workspace
-2. Pull the latest ai-docs with `/sync-ai-docs`
+2. Add ai-docs as another folder in the same workspace
 3. All skills and prompts will be available across both folders
 4. Create project-specific skills under `current-project/.github/skills/` as needed
