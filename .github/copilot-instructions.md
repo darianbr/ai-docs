@@ -18,6 +18,12 @@ These rules are required for all code changes:
 4. Before push, ensure the branch is up to date with `main`.
 5. Treat direct-to-`main` only as an explicit user-approved exception.
 
+## GitHub MCP First Policy
+
+1. Use GitHub MCP tools first for GitHub operations.
+2. Prefer MCP for issues, pull requests, reviews, releases, and merge actions.
+3. Use terminal git commands only when MCP does not support the required operation.
+
 ## At Session Start
 
 When you open a new session or switch workspaces:
