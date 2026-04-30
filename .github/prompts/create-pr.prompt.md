@@ -7,6 +7,11 @@ description: "Create a pull request following safety best practices, including b
 
 Follow this prompt to create a high-quality, safe pull request that passes all safety gates and minimizes reviewer burden.
 
+## MCP-first rule
+
+For GitHub operations in this workflow, use GitHub MCP tools first and foremost.
+Use terminal git commands only as a fallback when MCP cannot perform a required step.
+
 ## Prerequisites
 
 Before starting, ensure:
@@ -134,23 +139,18 @@ Confirm:
 - [ ] No secrets in commit history
 - [ ] No deprecated API usage introduced
 
-## 6. Create or Update the PR
+## 6. Create or Update the PR (MCP-first)
 
-When opening a new PR:
+Preferred flow:
 
-```bash
-git push origin <your-branch>
-```
+- Push your working branch.
+- Create PR with `mcp_github_create_pull_request`.
+- Update PR metadata with `mcp_github_update_pull_request`.
+- Request Copilot review with `mcp_github_request_copilot_review`.
 
-Then open the PR on GitHub with your formatted title and description.
+If MCP is unavailable, fallback to terminal/CLI flow for branch push and PR creation.
 
-If updating an existing PR:
-
-```bash
-git push origin <your-branch> --force-with-lease
-```
-
-**Note**: Use `--force-with-lease` (not `--force`) to prevent accidentally overwriting others' work. Only force-push with team awareness.
+If branch history was rebased, use safe push behavior (`--force-with-lease`, never `--force`) and coordinate with reviewers.
 
 ## Final Checklist
 

@@ -19,6 +19,12 @@ If `ai-docs` is included as a folder in your workspace, the shared instructions,
 - `.vscode/mcp.json` in `ai-docs` provides the GitHub MCP server configuration for that workspace.
 - No user-level symlink, no install script, and no sync hook are required.
 
+## MCP-first policy
+
+- For GitHub operations, use GitHub MCP tools first and foremost.
+- Use local git/terminal commands only when MCP cannot perform the required action.
+- Prefer MCP for PR creation, reviews, issue updates, release checks, and merge actions.
+
 ## Shared assets
 
 ### Prompts

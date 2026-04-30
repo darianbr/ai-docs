@@ -8,6 +8,22 @@ applyTo: "**"
 
 This workspace uses shared Copilot configuration from the **ai-docs** repository, including MCP servers, skills, prompts, and safety practices.
 
+## Branch Protection Policy
+
+These rules are required for all code changes:
+
+1. Never commit directly to `main`.
+2. Never push directly to `main`.
+3. Always create a short-lived branch for changes, then open a PR into `main`.
+4. Before push, ensure the branch is up to date with `main`.
+5. Treat direct-to-`main` only as an explicit user-approved exception.
+
+## GitHub MCP First Policy
+
+1. Use GitHub MCP tools first for GitHub operations.
+2. Prefer MCP for issues, pull requests, reviews, releases, and merge actions.
+3. Use terminal git commands only when MCP does not support the required operation.
+
 ## At Session Start
 
 When you open a new session or switch workspaces:
